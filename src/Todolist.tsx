@@ -29,9 +29,17 @@ export function Todolist(props: PropsType) {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-       if (e.key === 'Enter') {
-           addTaskHandler()
-       }
+        if (e.key === 'Enter') {
+            addTaskHandler()
+        }
+    }
+
+    const removeTaskHandler = (tid: string) =>{
+        props.removeTask(tid)
+    }
+
+    const tsarChangeFilter = (value: FilterValuesType) => {
+        props.changeFilter(value)
     }
 
     return (
@@ -42,38 +50,25 @@ export function Todolist(props: PropsType) {
                 <button onClick={addTaskHandler}>+</button>
             </div>
             <ul>
-                {props.tasks.map((task) => {
+                {
+                    props.tasks.map(t => {
 
-                    return (
-                        <li key={task.id}>
-                            <input type="checkbox" checked={task.isDone}/>
-                            <span>{task.title}</span>
-                            <button onClick={() => {
-                                props.removeTask(task.id)
-                            }}>
-                                x
-                            </button>
-                        </li>
-                    )
-                })
+
+                        return (
+                            <li key={t.id}>
+                                <input type="checkbox" checked={t.isDone}/>
+                                <span>{t.title}</span>
+                                <button onClick={()=>removeTaskHandler(t.id)}>x</button>
+                            </li>
+                        )
+                    }
+                )
                 }
             </ul>
             <div>
-                <button onClick={() => {
-                    props.changeFilter('all')
-                }}>
-                    All
-                </button>
-                <button onClick={() => {
-                    props.changeFilter('active')
-                }}>
-                    Active
-                </button>
-                <button onClick={() => {
-                    props.changeFilter('completed')
-                }}>
-                    Completed
-                </button>
+                <button onClick={() => tsarChangeFilter('all')}>All</button>
+                <button onClick={() => tsarChangeFilter('active')}>Active</button>
+                <button onClick={() => tsarChangeFilter('completed')}>Completed</button>
             </div>
         </div>
     )
