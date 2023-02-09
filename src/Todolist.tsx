@@ -35,7 +35,7 @@ export function Todolist(props: PropsType) {
         }
     }
 
-    const removeTaskHandler = (tid: string) =>{
+    const removeTaskHandler = (tid: string) => {
         props.removeTask(tid)
     }
 
@@ -48,28 +48,28 @@ export function Todolist(props: PropsType) {
             <h3>{props.title}</h3>
             <div>
                 <input value={inputValue} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
-                <Button name={'+'} callBack={addTaskHandler} />
+                <Button name={'+'} callBack={addTaskHandler}/>
             </div>
             <ul>
                 {
                     props.tasks.map(t => {
 
 
-                        return (
-                            <li key={t.id}>
-                                <input type="checkbox" checked={t.isDone}/>
-                                <span>{t.title}</span>
-                                <button onClick={()=>removeTaskHandler(t.id)}>x</button>
-                            </li>
-                        )
-                    }
-                )
+                            return (
+                                <li key={t.id}>
+                                    <input type="checkbox" checked={t.isDone}/>
+                                    <span>{t.title}</span>
+                                    <Button name={'x'} callBack={() => removeTaskHandler(t.id)}/>
+                                </li>
+                            )
+                        }
+                    )
                 }
             </ul>
             <div>
-                <button onClick={() => tsarChangeFilter('all')}>All</button>
-                <button onClick={() => tsarChangeFilter('active')}>Active</button>
-                <button onClick={() => tsarChangeFilter('completed')}>Completed</button>
+                <Button name={'All'} callBack={() => tsarChangeFilter('all')}/>
+                <Button name={'Active'} callBack={() => tsarChangeFilter('active')}/>
+                <Button name={'Completed'} callBack={() => tsarChangeFilter('completed')}/>
             </div>
         </div>
     )
