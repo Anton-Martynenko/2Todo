@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {FilterValuesType} from "./App";
+import {v1} from "uuid";
 
 type TaskType = {
     id: string
@@ -16,13 +17,19 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
-    let[inputValue,setInputValue] = useState('')
+    let [inputValue, setInputValue] = useState('')
+
+    const addTaskHandler = () => {
+        props.addTask(inputValue)
+        setInputValue('')
+    }
+
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input onChange={(e) => setInputValue(e.currentTarget.value)}/>
-                <button onClick={ () => {props.addTask(inputValue)} } >+</button>
+                <input value={inputValue} onChange={(e) => setInputValue(e.currentTarget.value)}/>
+                <button onClick={addTaskHandler}>+</button>
             </div>
             <ul>
                 {props.tasks.map((task) => {
@@ -48,7 +55,7 @@ export function Todolist(props: PropsType) {
                     All
                 </button>
                 <button onClick={() => {
-                    props.changeFilter( 'active')
+                    props.changeFilter('active')
                 }}>
                     Active
                 </button>
