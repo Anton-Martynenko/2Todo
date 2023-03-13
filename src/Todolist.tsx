@@ -22,10 +22,10 @@ export function Todolist(props: PropsType) {
     let [inputValue, setInputValue] = useState('')
 
     const addTaskHandler = () => {
-        if (inputValue === '') {
+        if (inputValue.trim() === '') {
             return;
         }
-        props.addTask(inputValue)
+        props.addTask(inputValue.trim())
         setInputValue('')
     }
 
