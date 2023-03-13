@@ -22,6 +22,9 @@ export function Todolist(props: PropsType) {
     let [inputValue, setInputValue] = useState('')
 
     const addTaskHandler = () => {
+        if (inputValue === '') {
+            return;
+        }
         props.addTask(inputValue)
         setInputValue('')
     }
