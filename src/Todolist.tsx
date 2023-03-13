@@ -51,8 +51,12 @@ export function Todolist(props: PropsType) {
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input value={inputValue} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
+                <input value={inputValue}
+                       onChange={onChangeHandler}
+                       onKeyDown={onKeyPressHandler}
+                       className={'error'}/>
                 <Button name={'+'} callBack={addTaskHandler}/>
+                <div className={'error-message'}>Title is requared</div>
             </div>
             <ul>
                 {
@@ -65,7 +69,8 @@ export function Todolist(props: PropsType) {
                                 <li key={t.id}>
                                     <input type="checkbox"
                                            onChange={onChangeHandler}
-                                           checked={t.isDone}/>
+                                           checked={t.isDone}
+                                           />
                                     <span>{t.title}</span>
                                     <Button name={'x'} callBack={() => removeTaskHandler(t.id)}/>
                                 </li>
