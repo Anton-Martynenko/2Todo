@@ -54,10 +54,14 @@ export function Todolist(props: PropsType) {
                 {
                     props.tasks.map(t => {
 
-
+                            const onChangeHandler = () => {
+                                console.log(t.id + 'want to change!');
+                            }
                             return (
                                 <li key={t.id}>
-                                    <input type="checkbox" checked={t.isDone}/>
+                                    <input type="checkbox"
+                                           onChange={onChangeHandler}
+                                           checked={t.isDone}/>
                                     <span>{t.title}</span>
                                     <Button name={'x'} callBack={() => removeTaskHandler(t.id)}/>
                                 </li>
