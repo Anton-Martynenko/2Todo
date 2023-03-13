@@ -27,8 +27,11 @@ function App() {
         setTasks(filteredTasks)
     }
 
-    function changeStatus(taskId: string) {
-        let task = tasks.find(t => t.id === taskId)
+    function changeStatus(taskId: string, isDone: boolean) {
+        let task = tasks.find(t => t.id === taskId);
+        if (task) {
+            task.isDone = isDone;
+        }
     }
 
 
