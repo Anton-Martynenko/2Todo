@@ -27,6 +27,10 @@ function App() {
         setTasks(filteredTasks)
     }
 
+    function changeStatus() {
+
+    }
+
 
     let [filter, setFilter] = useState<FilterValuesType>('all')
     let tasksForTodolist = tasks
