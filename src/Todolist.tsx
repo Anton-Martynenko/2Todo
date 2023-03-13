@@ -2,6 +2,8 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from "./App";
 import {v1} from "uuid";
 import {Button} from "./components/Button/Button";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 type TaskType = {
     id: string
@@ -19,14 +21,16 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
-    let [inputValue, setInputValue] = useState('')
+    let [inputValue, setInputValue] = useState('');
+    let [error, setError] = useState<string | null>(null);
 
     const addTaskHandler = () => {
-        if (inputValue.trim() === '') {
-            return;
+        if (inputValue.trim() !== '') {
+            props.addTask(inputValue.trim());
+            setInputValue('');
+        } else {
+            setError('title is required');
         }
-        props.addTask(inputValue.trim())
-        setInputValue('')
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +38,7 @@ export function Todolist(props: PropsType) {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null);
         if (e.key === 'Enter') {
             addTaskHandler()
         }
@@ -54,9 +59,9 @@ export function Todolist(props: PropsType) {
                 <input value={inputValue}
                        onChange={onChangeHandler}
                        onKeyDown={onKeyPressHandler}
-                       className={'error'}/>
+                       className={error ? 'error' : ''}/>
                 <Button name={'+'} callBack={addTaskHandler}/>
-                <div className={'error-message'}>Title is requared</div>
+                {error && <div className={'error-message'}>Title is required</div>}
             </div>
             <ul>
                 {
