@@ -28,13 +28,7 @@ function App() {
     }
 
     function changeStatus(taskId: string) {
-        let task = tasks.find((t) => {
-            if(t.id === taskId) {
-                return true;
-            } else {
-                return false;
-            }
-        })
+        let task = tasks.find(t => t.id === taskId)
     }
 
 
