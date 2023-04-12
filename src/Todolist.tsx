@@ -49,9 +49,13 @@ export function Todolist(props: PropsType) {
         props.removeTask(tid)
     }
 
-    const tsarChangeFilter = (value: FilterValuesType) => {
-        props.changeFilter(value);
-    }
+    //const tsarChangeFilter = (value: FilterValuesType) => {
+        //props.changeFilter(value);
+    //}
+
+    const onAllClickHandler = () => props.changeFilter('all');
+    const onActiveClickHandler = () => props.changeFilter('active');
+    const onCompletedClickHandler = () => props.changeFilter('completed');
 
     return (
         <div>
@@ -86,12 +90,12 @@ export function Todolist(props: PropsType) {
                 }
             </ul>
             <div>
-                <Button className={props.filter == 'all' ? 'active-filter' : ''} name={'All'}
-                        callBack={() => tsarChangeFilter('all')}/>
-                <Button className={props.filter === 'active' ? 'active-filter' : ''} name={'Active'}
-                        callBack={() => tsarChangeFilter('active')}/>
-                <Button className={props.filter === 'completed' ? 'active-filter' : ''} name={'Completed'}
-                        callBack={() => tsarChangeFilter('completed')}/>
+                <button className={props.filter == 'all' ? 'active-filter' : ''}
+                        onClick={onAllClickHandler}>All</button>
+                <button className={props.filter === 'active' ? 'active-filter' : ''}
+                        onClick={onActiveClickHandler}>Active</button>
+                <button className={props.filter === 'completed' ? 'active-filter' : ''}
+                        onClick={onCompletedClickHandler}>Completed</button>
             </div>
         </div>
     )

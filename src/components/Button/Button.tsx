@@ -2,9 +2,10 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from "../../App";
 
 type PropsType = {
-    name: string
-    callBack: () => void
+    name?: string
+    onClick?: () => void
     className?: any
+    callBack: () => void
 
 }
 
