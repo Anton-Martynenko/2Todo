@@ -7,15 +7,14 @@ export type FilterValuesType = 'all' | 'active' | 'completed';
 
 function App() {
 
-    let initTasks = [
+    let [tasks, setTasks] = useState([
         {id: v1(), title: "HTML&CSS", isDone: true},
         {id: v1(), title: "JS", isDone: true},
         {id: v1(), title: "ReactJS", isDone: false},
         {id: v1(), title: "Rest API", isDone: false},
         {id: v1(), title: "GraphQL", isDone: false}
-    ]
-
-    let [tasks, setTasks] = useState(initTasks);
+    ])
+    let [filter, setFilter] = useState<FilterValuesType>('all')
 
     const addTask = (inputValue: string) => {
         const newTask = {id: v1(), title: inputValue, isDone: false};
@@ -36,7 +35,7 @@ function App() {
     }
 
 
-    let [filter, setFilter] = useState<FilterValuesType>('all')
+
     let tasksForTodolist = tasks
     if (filter === 'active') {
         tasksForTodolist = tasks.filter(task => task.isDone === false)
@@ -57,6 +56,7 @@ function App() {
                       changeFilter={changeFilter}
                       addTask={addTask}
                       changeStatus={changeStatus}
+                      filter={filter}
             />
 
         </div>

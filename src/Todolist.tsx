@@ -18,6 +18,7 @@ type PropsType = {
     changeFilter: (value: FilterValuesType) => void
     addTask: (inputValue: string) => void
     changeStatus: (taskId: string, isDone: boolean) => void
+    filter: FilterValuesType
 }
 
 export function Todolist(props: PropsType) {
@@ -49,7 +50,7 @@ export function Todolist(props: PropsType) {
     }
 
     const tsarChangeFilter = (value: FilterValuesType) => {
-        props.changeFilter(value)
+        props.changeFilter(value);
     }
 
     return (
@@ -71,11 +72,11 @@ export function Todolist(props: PropsType) {
                                 props.changeStatus(t.id, e.currentTarget.checked);
                             }
                             return (
-                                <li key={t.id}>
+                                <li key={t.id} className={t.isDone ? 'is-Done' : ''}>
                                     <input type="checkbox"
                                            onChange={onChangeHandler}
                                            checked={t.isDone}
-                                           />
+                                    />
                                     <span>{t.title}</span>
                                     <Button name={'x'} callBack={() => removeTaskHandler(t.id)}/>
                                 </li>
@@ -85,9 +86,12 @@ export function Todolist(props: PropsType) {
                 }
             </ul>
             <div>
-                <Button name={'All'} callBack={() => tsarChangeFilter('all')}/>
-                <Button name={'Active'} callBack={() => tsarChangeFilter('active')}/>
-                <Button name={'Completed'} callBack={() => tsarChangeFilter('completed')}/>
+                <Button className={props.filter == 'all' ? 'active-filter' : ''} name={'All'}
+                        callBack={() => tsarChangeFilter('all')}/>
+                <Button className={props.filter === 'active' ? 'active-filter' : ''} name={'Active'}
+                        callBack={() => tsarChangeFilter('active')}/>
+                <Button className={props.filter === 'completed' ? 'active-filter' : ''} name={'Completed'}
+                        callBack={() => tsarChangeFilter('completed')}/>
             </div>
         </div>
     )

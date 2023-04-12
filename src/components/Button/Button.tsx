@@ -1,8 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {FilterValuesType} from "../../App";
 
 type PropsType = {
     name: string
     callBack: () => void
+    className?: any
+
 }
 
 export const Button = (props: PropsType) => {
