@@ -56,11 +56,27 @@ function App() {
             setTodoLists([...todoLists]);
         }
     }
+    let todoListId1 = v1();
+    let todoListId2 = v1();
 
     let [todoLists, setTodoLists] = useState<Array<TodoListsType>>([
         {id: v1(), title: "What to learn", filter: "active"},
         {id: v1(), title: "What to buy", filter: "completed"}
     ])
+
+    let [allTasks, setAllTasks] = useState({
+        [todoListId1]: [
+            {id: v1(), title: "HTML&CSS", isDone: true},
+            {id: v1(), title: "JS", isDone: true},
+            {id: v1(), title: "ReactJS", isDone: false},
+            {id: v1(), title: "Rest API", isDone: false},
+            {id: v1(), title: "GraphQL", isDone: false}
+        ],
+        [todoListId2]: [
+            {id: v1(), title: "Book", isDone: true},
+            {id: v1(), title: "Milk", isDone: true}
+        ]
+    })
 
     return (
         <div className="App">
