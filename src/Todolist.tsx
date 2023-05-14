@@ -4,7 +4,7 @@ import {Button} from "./components/Button/Button";
 import {Simulate} from "react-dom/test-utils";
 import {AddItemForm} from "./AddItemForm";
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     isDone: boolean
@@ -82,7 +82,7 @@ export function Todolist(props: PropsType) {
                                            onChange={onChangeHandler}
                                            checked={t.isDone}
                                     />
-                                    <span>{t.title}</span>
+                                    <EditableSpan title={t.title} />
                                     <Button name={'x'} callBack={() => removeTaskHandler(t.id)}/>
                                 </li>
                             )
@@ -102,3 +102,10 @@ export function Todolist(props: PropsType) {
     )
 }
 
+export type EditableSpanPropsType = {
+    title: string
+}
+
+function EditableSpan (props: EditableSpanPropsType) {
+    return <span>{props.title}!---!</span>
+}
