@@ -1,9 +1,8 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from "./App";
-import {v1} from "uuid";
 import {Button} from "./components/Button/Button";
 import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+import {AddItemForm} from "./AddItemForm";
 
 type TaskType = {
     id: string
@@ -62,10 +61,14 @@ export function Todolist(props: PropsType) {
         props.removeTodolist(props.id);
     };
 
+    const addTask = (inputValue: string) => {
+        props.addTask(inputValue, props.id);
+    }
+
     return (
         <div>
             <h3>{props.title} <button onClick={removeTodolist}>x</button></h3>
-            <AddItemForm addTask={props.addTask} id={props.id} />
+            <AddItemForm addItem={addTask} />
             <ul>
                 {
                     props.tasks.map(t => {
@@ -99,42 +102,3 @@ export function Todolist(props: PropsType) {
     )
 }
 
-type AddItemFormPropsType = {
-    addTask: (inputValue: string, todoListId: string) => void
-    id: string
-}
-function AddItemForm (props: AddItemFormPropsType) {
-    let [inputValue, setInputValue] = useState('');
-    let [error, setError] = useState<string | null>(null);
-
-    const addTaskHandler = () => {
-        if (inputValue.trim() !== '') {
-            props.addTask(inputValue.trim(), props.id);
-            setInputValue('');
-        } else {
-            setError('title is required');
-        }
-    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.currentTarget.value)
-    }
-
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
-        if (e.key === 'Enter') {
-            addTaskHandler()
-        }
-    }
-
-    return (
-        <div>
-            <input value={inputValue}
-                   onChange={onChangeHandler}
-                   onKeyDown={onKeyPressHandler}
-                   className={error ? 'error' : ''}/>
-            <Button name={'+'} callBack={addTaskHandler}/>
-            {error && <div className={'error-message'}>Title is required</div>}
-        </div>
-    )
-}
