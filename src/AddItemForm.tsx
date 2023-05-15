@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 //import {Button} from "./components/Button/Button";
 
 export type AddItemFormPropsType = {
@@ -32,10 +32,18 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     return (
         <div>
-            <input value={inputValue}
-                   onChange={onChangeHandler}
-                   onKeyDown={onKeyPressHandler}
-                   className={error ? 'error' : ''}/>
+            {/*<input value={inputValue}*/}
+            {/*       onChange={onChangeHandler}*/}
+            {/*       onKeyDown={onKeyPressHandler}*/}
+            {/*       className={error ? 'error' : ''}/>*/}
+            <TextField value={inputValue}
+                       variant={'outlined'}
+                       label={'Type value'}
+                       onChange={onChangeHandler}
+                       onKeyDown={onKeyPressHandler}
+                       error={!!error}
+                       // className={error ? 'error' : ''}
+            />
             {/*<Button name={'+'} callBack={addTaskHandler}/>*/}
             <Button onClick={addTaskHandler} variant={'contained'} color={'primary'}>+</Button>
             {error && <div className={'error-message'}>Title is required</div>}
