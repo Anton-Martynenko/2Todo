@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
-import {Button, IconButton} from "@mui/material";
+import {Button, Checkbox, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 
 export type TaskType = {
@@ -83,9 +83,9 @@ export function Todolist(props: PropsType) {
             <ul>
                 {
                     props.tasks.map(t => {
-                        const removeTaskHandler = () => {
-                            props.removeTask(t.id, props.id)
-                        }
+                            const removeTaskHandler = () => {
+                                props.removeTask(t.id, props.id)
+                            }
 
                             const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
                                 props.changeStatus(t.id, e.currentTarget.checked, props.id);
@@ -95,9 +95,12 @@ export function Todolist(props: PropsType) {
                             }
                             return (
                                 <li key={t.id} className={t.isDone ? 'is-Done' : ''}>
-                                    <input type="checkbox"
-                                           onChange={onChangeHandler}
-                                           checked={t.isDone}
+                                    {/*<input type="checkbox"*/}
+                                    {/*       onChange={onChangeHandler}*/}
+                                    {/*       checked={t.isDone}*/}
+                                    {/*/>*/}
+                                    <Checkbox onChange={onChangeHandler}
+                                              checked={t.isDone}
                                     />
                                     <EditableSpan title={t.title}
                                                   onChange={onChangeTitleHandler}/>
@@ -114,17 +117,17 @@ export function Todolist(props: PropsType) {
             </ul>
             <div>
                 <Button variant={props.filter === 'all' ? 'contained' : 'text'}
-                        // className={props.filter === 'all' ? 'active-filter' : ''}
+                    // className={props.filter === 'all' ? 'active-filter' : ''}
                         onClick={onAllClickHandler}>All
                 </Button>
                 <Button color={'primary'}
                         variant={props.filter === 'active' ? 'contained' : 'text'}
-                        // className={props.filter === 'active' ? 'active-filter' : ''}
+                    // className={props.filter === 'active' ? 'active-filter' : ''}
                         onClick={onActiveClickHandler}>Active
                 </Button>
                 <Button color={'secondary'}
                         variant={props.filter === 'completed' ? 'contained' : 'text'}
-                        // className={props.filter === 'completed' ? 'active-filter' : ''}
+                    // className={props.filter === 'completed' ? 'active-filter' : ''}
                         onClick={onCompletedClickHandler}>Completed
                 </Button>
             </div>

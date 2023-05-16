@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {Button, TextField} from "@mui/material";
+import {Button, IconButton, TextField} from "@mui/material";
+import {AddAlarm} from "@mui/icons-material";
 //import {Button} from "./components/Button/Button";
 
 export type AddItemFormPropsType = {
@@ -42,11 +43,14 @@ export function AddItemForm(props: AddItemFormPropsType) {
                        onChange={onChangeHandler}
                        onKeyDown={onKeyPressHandler}
                        error={!!error}
+                       helperText={error}
                        // className={error ? 'error' : ''}
             />
             {/*<Button name={'+'} callBack={addTaskHandler}/>*/}
-            <Button onClick={addTaskHandler} variant={'contained'} color={'primary'}>+</Button>
-            {error && <div className={'error-message'}>Title is required</div>}
+            <IconButton onClick={addTaskHandler} color={'primary'}>
+                <AddAlarm />
+            </IconButton>
+            {/*{error && <div className={'error-message'}>Title is required</div>}*/}
         </div>
     )
 }
